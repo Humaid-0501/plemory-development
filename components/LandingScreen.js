@@ -1,5 +1,13 @@
 import React, { Component, useState } from "react";
-import { Text, View, StyleSheet, SafeAreaView, Button } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  SafeAreaView,
+  Button,
+  TouchableHighlight,
+  Image,
+} from "react-native";
 import data from "../assets/data/memories";
 import MemoryContext from "./contexts/MemoryContext";
 // const RNFS = require('react-native-fs');
@@ -67,15 +75,33 @@ class LandingScreen extends Component {
           <RenderScene />
         </View>
         <View style={styles.map}>
-          <Button
-            title="Map View"
+          <TouchableHighlight
+            underlayColor="none"
             onPress={() =>
               this.props.navigation.navigate("Map View", {
                 memories: this.state.memories,
                 updateMemory: this.updateMemory,
               })
             }
-          />
+          >
+            <View>
+              {/* <FontAwesome5 name="map-marked-alt" size={54} color="black" /> */}
+              <Image
+                source={require("../assets/map.png")}
+                fadeDuration={5}
+                style={{
+                  width: 80,
+                  height: 80,
+                  borderRadius: 10,
+                  borderColor: "black",
+                  borderWidth: 1,
+                }}
+              />
+              {/* <Ionicons name="md-checkmark-circle" size={32} color="green" /> */}
+              {/* <Text>Map View</Text> */}
+            </View>
+          </TouchableHighlight>
+          {/* <Button title="Map View" onPress={() => this.props.navigation.navigate("Map View", {memories: this.state.memories, updateMemory: this.updateMemory}) } /> */}
         </View>
       </SafeAreaView>
     );
