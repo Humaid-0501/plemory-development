@@ -1,17 +1,27 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, SafeAreaView, Button} from 'react-native';
+import {Text, View, StyleSheet, SafeAreaView, Button, TouchableHighlight, Image} from 'react-native';
 import data from "../assets/data/memories";
 import MemoryContext from './contexts/MemoryContext';
 // const RNFS = require('react-native-fs');
 import * as FileSystem from 'expo-file-system';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 class LandingScreen extends Component{
     constructor(props){
         super(props)
         // console.log(this.context)
         this.state = {
-            memories : data
+            memories : data,
+            cur_memories: data
         }
+        this.willFocusSubscription = this.props.navigation.addListener(
+            'focus',
+            () => {
+                console.log("Will Focus")
+              this.fetchData(this.state.cur_memories);
+            }
+        );
     }
 
     updateMemory = async (id, action) =>{
@@ -26,9 +36,11 @@ class LandingScreen extends Component{
                 }
             }
         }
+        // data = memories
         this.setState({
-            memories
+            cur_memories: memories
         })
+        console.log(memories)
         // console.log(memories)
         // fs.writeFile('../assets/data/memories".json', JSON.stringify(memories), (err) => {
         //     if (err) console.log('Error writing file:', err);
@@ -51,16 +63,24 @@ class LandingScreen extends Component{
         // });
     }
 
-    fetchData = () =>{
+    fetchData = (cur_memories) =>{
         // data = data.map(d => d.image = require(d.imageUrl))
-        this.setState({memories: data});
+        this.setState({memories: cur_memories});
         // console.log(this.state.memories)
-
     }
+
+    // componentWillUnmount() {
+    //     this.willFocusSubscription();
+    // }
 
     componentDidMount(){
-        this.fetchData();
+        this.fetchData(data);
     }
+
+    // componentDidUpdate(){
+    //     this.forceUpdate();
+    // }
+
     render(){
         return (
             <SafeAreaView style={styles.container}>
@@ -68,8 +88,19 @@ class LandingScreen extends Component{
                     <Text>AR View</Text>
                 </View>
                 <View style={styles.map}>
-
-                    <Button title="Map View" onPress={() => this.props.navigation.navigate("Map View", {memories: this.state.memories, updateMemory: this.updateMemory}) } />
+                    <TouchableHighlight underlayColor='none' onPress={() => this.props.navigation.navigate("Map View", {memories: this.state.memories, updateMemory: this.updateMemory})}>
+                        <View>
+                            {/* <FontAwesome5 name="map-marked-alt" size={54} color="black" /> */}
+                            <Image
+                                source={require('../assets/map.png')}
+                                fadeDuration={5}
+                                style={{ width: 80, height: 80, borderRadius: 10, borderColor: "black", borderWidth: 1}}
+                            />
+                            {/* <Ionicons name="md-checkmark-circle" size={32} color="green" /> */}
+                            {/* <Text>Map View</Text> */}
+                        </View>
+                    </TouchableHighlight>
+                    {/* <Button title="Map View" onPress={() => this.props.navigation.navigate("Map View", {memories: this.state.memories, updateMemory: this.updateMemory}) } /> */}
                 </View>
             </SafeAreaView>
         );
@@ -80,12 +111,15 @@ class LandingScreen extends Component{
 const styles = StyleSheet.create({
     container:{
         flex: 1,
+        width: "100%",
+        alignContent: 'center'
     },
     arview:{
         flex: 7
     },
     map: {
-        flex: 1
+        flex: 1,
+        paddingLeft: 20
     }
 })
 

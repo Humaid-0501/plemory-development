@@ -15,8 +15,8 @@ const CarouselCardItem = ({ item, index }, parallaxProps) => {
         <TouchableOpacity onPress={() => propsGlobal.navigation.navigate("Memory View", {memory: item, updateMemory: propsGlobal.route.params.updateMemory})}>
             <View style={CarouselStyles.container} key={index}>
                 <Image
-                source={{uri: "https://picsum.photos/200/300"}}
-                style={CarouselStyles.image}
+                    source={{uri: item.image}}
+                    style={CarouselStyles.image}
                 />
                 <Text style={CarouselStyles.header}>{item.name}</Text>
                 {/* <Text style={CarouselStyles.body}>{item.body}</Text> */}
@@ -25,25 +25,7 @@ const CarouselCardItem = ({ item, index }, parallaxProps) => {
     )
   }
 
-const parallaxStyles = StyleSheet.create({
-    container: {
-      flex: 1,
-    },
-    item: {
-      width: screenWidth - 60,
-      height: screenWidth - 60,
-    },
-    imageContainer: {
-      flex: 1,
-      marginBottom: Platform.select({ios: 0, android: 1}), // Prevent a random Android rendering issue
-      backgroundColor: 'white',
-      borderRadius: 8,
-    },
-    image: {
-      ...StyleSheet.absoluteFillObject,
-      resizeMode: 'cover',
-    },
-  });
+
 
 
 class RelatedMemoriesScreen extends React.Component {
@@ -144,23 +126,29 @@ const CarouselStyles = StyleSheet.create({
         marginTop: 20,
         shadowColor: "#000",
         shadowOffset: {
-        width: 0,
-        height: 3,
+            width: 0,
+            height: 3,
         },
         shadowOpacity: 0.29,
         shadowRadius: 4.65,
         elevation: 7,
+        backgroundColor: "black"
+
     },
     image: {
-        width: ITEM_WIDTH,
+        width: 200,
         height: 200,
+        borderRadius: 200,
+        marginLeft: 40
+        // alignContent: "center"
     },
     header: {
-        color: "#222",
+        color: "white",
         fontSize: 16,
         // fontWeight: "bold",
         paddingLeft: 10,
-        paddingTop: 10
+        paddingTop: 10,
+        textAlign: "center"
     },
     body: {
         color: "#222",

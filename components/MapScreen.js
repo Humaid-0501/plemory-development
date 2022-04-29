@@ -8,9 +8,11 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
 import { FontAwesome } from "@expo/vector-icons";
 import MemoryContext from './contexts/MemoryContext';
+import Slider from '@react-native-community/slider';
+
 
 
 class MapScreen extends React.Component {
@@ -32,10 +34,9 @@ class MapScreen extends React.Component {
 
   componentDidMount(){
     const memories = this.props.route.params.memories
-    // console.log(memories)
     this.setState({
       ...this,
-      memories : memories
+      memories : memories 
     })
   }
   
@@ -95,8 +96,8 @@ class MapScreen extends React.Component {
       <View>
         <MapView
           zoomEnabled={true}
-          provider={PROVIDER_GOOGLE}
-          style={{ width: "100%", height: "100%" }}
+          provider={PROVIDER_DEFAULT}
+          style={{ width: "100%", height: "96%" }}
           initialRegion={{
             latitude: 37.231994317618074,
             longitude: -80.4181124594997,
@@ -121,12 +122,13 @@ class MapScreen extends React.Component {
               >
                 {/* <TouchableOpacity onPress={() => this.props.navigation.navigate("Related Memories", {memory: memory})}> */}
                   <Image
-                    key={this.state.memories.id}
-                    source={{uri: "https://picsum.photos/200/300"}}
+                    // key={this.state.memories.id}
+                    source={{uri: memory.image}}
                     style={{
                       width: memory.popularity,
                       height: memory.popularity,
                       resizeMode: "contain",
+                      borderRadius: 20
                     }}
                   />
                 {/* </TouchableOpacity> */}
@@ -138,6 +140,14 @@ class MapScreen extends React.Component {
           <FontAwesome name="search" size={25} />
           <TextInput style={styles.input} placeholder="Search Memories" />
         </View>
+        <Slider
+          style={styles.slider}
+          minimumValue={0}
+          maximumValue={1}
+          vertical = {true}
+          minimumTrackTintColor="#FFFFFF"
+          maximumTrackTintColor="#000000"
+        />
       </View>
     );
   }
@@ -158,13 +168,17 @@ const styles = StyleSheet.create({
     elevation: 10,
     shadowOpacity: 1,
     padding: 15,
-    borderRadius: 40,
+    borderRadius: 20,
   },
   input: {
     fontSize: 20,
     marginLeft: 20,
     width: "85%",
   },
+  slider:{
+    position: "absolute",
+    top: "97%",
+  }
 });
 
 MapScreen.contextType = MemoryContext;
