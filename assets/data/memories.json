@@ -1,0 +1,87 @@
+[
+    {
+        "id": 0,
+        "image": "https://res.cloudinary.com/dljgmfj95/image/upload/v1651111532/gluldbax77aydhtv0r9n.png",
+        "latitude": 37.228280451984524,
+        "longitude": -80.42063134434545,
+        "name": "VT Snowball Fight",
+        "popularity": 70,
+        "location": "Drillfield",
+        "related" :  [
+          {
+            "id": 0,
+            "image": "https://res.cloudinary.com/dljgmfj95/image/upload/v1651111593/rqoatajmltummmuuze1b.png",
+            "latitude": 37.22943979467079,
+            "longitude": -80.41823015204601,
+            "name": "Halloween Party",
+            "popularity": 50,
+            "location": "Squires Student Center"
+          },
+          {
+            "id": 1,
+            "image": "https://res.cloudinary.com/dljgmfj95/image/upload/v1651111593/rqoatajmltummmuuze1b.png",
+            "latitude": 37.22943979467079,
+            "longitude": -80.41823015204601,
+            "name": "Halloween Party",
+            "popularity": 50,
+            "location": "Squires Student Center"
+          }
+        ]
+      },
+  
+      {
+        "id": 1,
+        "image": "https://res.cloudinary.com/dljgmfj95/image/upload/v1651111593/rqoatajmltummmuuze1b.png",
+        "latitude": 37.22943979467079,
+        "longitude": -80.41823015204601,
+        "name": "Halloween Party",
+        "popularity": 50,
+        "location": "Squires Student Center", 
+        "related" : []
+      },
+  
+      {
+        "id": 2,
+        "image": "http://res.cloudinary.com/dljgmfj95/image/upload/v1651111664/spiymcq2kxwdnab8pae8.png",
+        "latitude": 37.23037304294517,
+        "longitude": -80.41939130474975,
+        "name": "National Day Flag Raising",
+        "popularity": 45,
+        "location": "Lane Hall",
+        "related" : []
+
+      },
+  
+      {
+        "id": 3,
+        "image": "http://res.cloudinary.com/dljgmfj95/image/upload/v1651111699/v9nh61qicptlmgqksazz.png",
+        "latitude": 37.22948529411306,
+        "longitude": -80.42465473005228,
+        "name": "Graduation Day",
+        "popularity": 55,
+        "location": "Johnston Student Center",
+        "related" : []
+
+      },
+  
+      {
+        "id": 4,
+        "image": "https://res.cloudinary.com/dljgmfj95/image/upload/v1651111744/vgstwzpcxzgdhftnwaeo.png",
+        "latitude": 37.22858665038255,
+        "longitude": -80.42314988658745,
+        "name": "National Day Flag Raising",
+        "popularity": 40,
+        "location": "Burruss Hall",
+        "related" : []
+      },
+      {
+        "id": 5,
+        "image": "http://res.cloudinary.com/dljgmfj95/image/upload/v1651115214/tnriw3wwab9thoud14nw.jpg",
+        "latitude": 37.2294693,
+        "longitude": -80.4194277,
+        "name": "Torgerson Bridge",
+        "popularity": 40,
+        "location": "Torgerson Bridge",
+        "related" : []
+      }
+    ]
