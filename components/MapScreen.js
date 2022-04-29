@@ -28,7 +28,8 @@ class MapScreen extends React.Component {
       LONGITUDE,
       LATITUDE_DELTA,
       LONGITUDE_DELTA,
-      memories : this.props.route.params.memories
+      memories : this.props.route.params.memories,
+      currentMonth: 0
     }
   }
 
@@ -39,65 +40,20 @@ class MapScreen extends React.Component {
       memories : memories 
     })
   }
+
   
-  // const data2 = [
-  //   {
-  //     id: "0",
-  //     image: require("../assets/memories/snowball.png"),
-  //     latitude: 37.228280451984524,
-  //     longitude: -80.42063134434545,
-  //     name: "VT Snowball Fight",
-  //     popularity: 70,
-  //     location: "Drillfield",
-  //   },
-
-  //   {
-  //     id: "1",
-  //     image: require("../assets/memories/halloween.png"),
-  //     latitude: 37.22943979467079,
-  //     longitude: -80.41823015204601,
-  //     name: "Halloween Party",
-  //     popularity: 50,
-  //     location: "Squires Student Center",
-  //   },
-
-  //   {
-  //     id: "2",
-  //     image: require("../assets/memories/flag.png"),
-  //     latitude: 37.23037304294517,
-  //     longitude: -80.41939130474975,
-  //     name: "National Day Flag Raising",
-  //     popularity: 45,
-  //     location: "Lane Hall",
-  //   },
-
-  //   {
-  //     id: "3",
-  //     image: require("../assets/memories/graduation.png"),
-  //     latitude: 37.22948529411306,
-  //     longitude: -80.42465473005228,
-  //     name: "Graduation Day",
-  //     popularity: 55,
-  //     location: "Johnston Student Center",
-  //   },
-
-  //   {
-  //     id: "4",
-  //     image: require("../assets/memories/national.png"),
-  //     latitude: 37.22858665038255,
-  //     longitude: -80.42314988658745,
-  //     name: "National Day Flag Raising",
-  //     popularity: 40,
-  //     location: "Burruss Hall",
-  //   },
-  // ];
+  sliderChanged = (e) =>{
+    this.setState({
+      currentMonth: e
+    })
+  }
   render(){
     return (
       <View>
         <MapView
           zoomEnabled={true}
           provider={PROVIDER_DEFAULT}
-          style={{ width: "100%", height: "96%" }}
+          style={{ width: "100%", height: "100%" }}
           initialRegion={{
             latitude: 37.231994317618074,
             longitude: -80.4181124594997,
@@ -109,8 +65,8 @@ class MapScreen extends React.Component {
             <View key={this.state.memories.id} onPress={() => this.props.navigation.navigate("Related Memories", {memories : this.state.memories, memory: memory, updateMemory: this.props.route.params.updateMemory})}>
               <Marker
                 style={{
-                  width: memory.popularity,
-                  height: memory.popularity,
+                  width: memory.popularity[this.state.currentMonth],
+                  height: memory.popularity[this.state.currentMonth],
                 }}
                 key={this.state.memories.id}
                 title={memory.name}
@@ -125,8 +81,8 @@ class MapScreen extends React.Component {
                     // key={this.state.memories.id}
                     source={{uri: memory.image}}
                     style={{
-                      width: memory.popularity,
-                      height: memory.popularity,
+                      width: memory.popularity[this.state.currentMonth],
+                      height: memory.popularity[this.state.currentMonth],
                       resizeMode: "contain",
                       borderRadius: 20
                     }}
@@ -140,14 +96,19 @@ class MapScreen extends React.Component {
           <FontAwesome name="search" size={25} />
           <TextInput style={styles.input} placeholder="Search Memories" />
         </View>
-        <Slider
-          style={styles.slider}
-          minimumValue={0}
-          maximumValue={1}
-          vertical = {true}
-          minimumTrackTintColor="#FFFFFF"
-          maximumTrackTintColor="#000000"
-        />
+        <View style={styles.sliderContainer}>
+          <Slider
+            style={styles.slider}
+            step={1}
+            minimumValue={0}
+            maximumValue={5}
+            onSlidingComplete = {this.sliderChanged}
+            // vertical
+            // minimumTrackTintColor="bl"
+            // maximumTrackTintColor="#000000"
+          />
+        </View>
+       
       </View>
     );
   }
@@ -175,9 +136,13 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     width: "85%",
   },
-  slider:{
+  sliderContainer:{
     position: "absolute",
-    top: "97%",
+    top: "80%",
+    width: 200,
+    height: 40,
+    left: "60%",
+    transform: [{ rotate: '270deg'}]
   }
 });
 

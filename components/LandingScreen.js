@@ -29,10 +29,10 @@ class LandingScreen extends Component{
         for(let i = 0; i < memories.length; i++){
             if(memories[i].id == id){
                 if(action == "throw"){
-                    memories[i].popularity += 10
+                    memories[i].popularity[0] += 5
                 }
                 else{
-                    memories[i].popularity += 30
+                    memories[i].popularity[0] += 10
                 }
             }
         }
