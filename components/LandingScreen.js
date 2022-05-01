@@ -21,6 +21,13 @@ class LandingScreen extends Component {
     this.state = {
       memories: data,
     };
+    this.willFocusSubscription = this.props.navigation.addListener(
+      "focus",
+      () => {
+        console.log("Will Focus");
+        this.fetchData(this.state.memories);
+      }
+    );
   }
 
   updateMemory = async (id, action) => {
@@ -37,6 +44,11 @@ class LandingScreen extends Component {
     this.setState({
       memories,
     });
+    let fileUri = FileSystem.documentDirectory + "memories.json";
+    await FileSystem.writeAsStringAsync(fileUri, JSON.stringify(memories), {
+      encoding: FileSystem.EncodingType.UTF8,
+    });
+    console.log(fileUri);
     // console.log(memories)
     // fs.writeFile('../assets/data/memories".json', JSON.stringify(memories), (err) => {
     //     if (err) console.log('Error writing file:', err);
@@ -59,14 +71,19 @@ class LandingScreen extends Component {
     // });
   };
 
-  fetchData = () => {
+  fetchData = async (cur_memories) => {
+    let fileUri = FileSystem.documentDirectory + "memories.json";
+    let content = await FileSystem.readAsStringAsync(fileUri, {
+      encoding: FileSystem.EncodingType.UTF8,
+    });
+    // console.log(content)
     // data = data.map(d => d.image = require(d.imageUrl))
-    this.setState({ memories: data });
+    this.setState({ memories: JSON.parse(content) });
     // console.log(this.state.memories)
   };
 
   componentDidMount() {
-    this.fetchData();
+    this.fetchData(data);
   }
   render() {
     return (
@@ -139,6 +156,7 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
+    // backgroundColor: "transparent",
   },
 });
 

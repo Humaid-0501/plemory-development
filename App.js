@@ -13,6 +13,10 @@ import AR from "./screens/demos/AR";
 import OGSnowE01292022 from "./screens/discord_issues/OGSnowE_01292022";
 import CheethKeeth12202021 from "./screens/discord_issues/CheethKeeth_12202021";
 import { CheethKeeth01252022 } from "./screens/discord_issues/CheethKeeth_01252022";
+
+import ImageCaptureScreen from "./components/ImageCaptureScreen";
+import CameraScreen from "./components/CameraScreen";
+
 // import VV12202021 from "./screens/discord_issues/VV_12202021";
 // import Issue24 from "./screens/github_issues/Issue24";
 // import Issue31 from "./screens/github_issues/Issue31";
@@ -110,7 +114,7 @@ const Stack = createNativeStackNavigator();
 //   },
 // ];
 
-export default () => {
+export default class App extends React.Component {
   // const [view, setView] = useState("HOME");
 
   // // const handleClickGitHubLink = (id: string) => {
@@ -328,28 +332,56 @@ export default () => {
   //   }
   // };
 
-  return (
-    <React.Fragment>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={LandingScreen} />
-          <Stack.Screen name="Map View" component={MapScreen} />
-          <Stack.Screen
-            name="Related Memories"
-            component={RelatedMemoriesScreen}
-          />
-          <Stack.Screen name="Memory View" component={MemoryViewScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-      {/* {renderScene()} */}
-      {/* {view !== "HOME" ? (
-        <Pressable onPress={() => setView("HOME")} style={styles.homeButton}>
-          <Text style={styles.buttonText}>Home</Text>
-        </Pressable>
-      ) : null} */}
-    </React.Fragment>
-  );
-};
+  componentDidMount() {
+    this.createFile();
+  }
+
+  createFile = async () => {
+    let fileUri = FileSystem.documentDirectory + "memories.json";
+    let file = await FileSystem.getInfoAsync(fileUri);
+    // if (!file.exists) {
+    await FileSystem.writeAsStringAsync(fileUri, JSON.stringify(data), {
+      encoding: FileSystem.EncodingType.UTF8,
+    });
+    console.log(fileUri);
+    // }
+    let content = await FileSystem.readAsStringAsync(fileUri, {
+      encoding: FileSystem.EncodingType.UTF8,
+    });
+    console.log(content);
+  };
+  render() {
+    return (
+      <React.Fragment>
+        {/* <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="Home" component={LandingScreen} />
+            <Stack.Screen name="Map View" component={MapScreen} />
+            <Stack.Screen
+              name="Related Memories"
+              component={RelatedMemoriesScreen}
+            />
+            <Stack.Screen name="Memory View" component={MemoryViewScreen} />
+          </Stack.Navigator>
+        </NavigationContainer> */}
+
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="Home" component={LandingScreen} />
+            <Stack.Screen name="Map View" component={MapScreen} />
+            <Stack.Screen
+              name="Related Memories"
+              component={RelatedMemoriesScreen}
+            />
+            <Stack.Screen name="Memory View" component={MemoryViewScreen} />
+            <Stack.Screen name="Upload Memory" component={ImageCaptureScreen} />
+            <Stack.Screen name="Camera" component={CameraScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </React.Fragment>
+    );
+  }
+}
 
 var styles = StyleSheet.create({
   home: {

@@ -16,6 +16,7 @@ import MapView, {
 import { FontAwesome } from "@expo/vector-icons";
 import MemoryContext from "./contexts/MemoryContext";
 import Slider from "@react-native-community/slider";
+// import CameraComponent from "./CameraScreen"
 
 class MapScreen extends React.Component {
   constructor(props) {
@@ -50,7 +51,7 @@ class MapScreen extends React.Component {
   };
   render() {
     return (
-      <View>
+      <View key={Date.now()}>
         <MapView
           zoomEnabled={true}
           provider={PROVIDER_DEFAULT}
@@ -61,8 +62,10 @@ class MapScreen extends React.Component {
             latitudeDelta: this.state.LATITUDE_DELTA,
             longitudeDelta: this.state.LONGITUDE_DELTA,
           }}
+          key={Date.now()}
         >
-          {this.state.memories &&
+          {this.state &&
+            this.state.memories &&
             this.state.memories.map((memory, i) => (
               <View
                 key={this.state.memories.id}
@@ -89,7 +92,7 @@ class MapScreen extends React.Component {
                 >
                   {/* <TouchableOpacity onPress={() => this.props.navigation.navigate("Related Memories", {memory: memory})}> */}
                   <Image
-                    // key={this.state.memories.id}
+                    key={this.state.memories.id}
                     source={{ uri: memory.image }}
                     style={{
                       width: memory.popularity[this.state.currentMonth],
@@ -109,7 +112,7 @@ class MapScreen extends React.Component {
         </View>
         <View style={styles.sliderContainer}>
           <Slider
-            style={styles.slider}
+            // style={styles.slider}
             step={1}
             minimumValue={0}
             maximumValue={5}
@@ -118,6 +121,21 @@ class MapScreen extends React.Component {
             // minimumTrackTintColor="bl"
             // maximumTrackTintColor="#000000"
           />
+        </View>
+        <View style={styles.cameraContainer}>
+          <TouchableOpacity
+            onPress={() =>
+              this.props.navigation.navigate("Camera", {
+                navigation: this.props.navigation,
+              })
+            }
+          >
+            <Image
+              style={styles.cameraButtonStyling}
+              source={require("../assets/capturebutton.png")}
+            />
+          </TouchableOpacity>
+          {/* <CameraComponent/> */}
         </View>
       </View>
     );
@@ -147,11 +165,26 @@ const styles = StyleSheet.create({
   },
   sliderContainer: {
     position: "absolute",
-    top: "80%",
-    width: 200,
-    height: 40,
-    right: 5,
+    top: "60%",
+    width: 300,
+    height: 100,
+    left: "60%",
+    marginRight: 0,
     transform: [{ rotate: "270deg" }],
+  },
+  cameraButtonStyling: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "white",
+    width: 100,
+    height: 100,
+    borderRadius: 100,
+  },
+  cameraContainer: {
+    position: "absolute",
+    alignSelf: "center",
+    top: "80%",
+    left: "40%",
+    // borderRadius: 100
   },
 });
 
