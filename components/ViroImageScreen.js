@@ -32,19 +32,32 @@ import Slider from "@react-native-community/slider";
 class HelloWorldSceneAR extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props);
     // console.log(this.props.data.memories);
   }
+
+  componentDidUpdate() {
+    console.log(this.props.arSceneNavigator.viroAppProps);
+  }
+
   render() {
     return (
       <ViroARScene onTrackingUpdated={handleTrackingUpdated} key={1}>
-        {this.props.data.memories &&
-          this.props.data.memories.map((memory, i) => (
+        {this.props &&
+          this.props.arSceneNavigator &&
+          this.props.arSceneNavigator.viroAppProps &&
+          this.props.arSceneNavigator.viroAppProps.memories &&
+          this.props.arSceneNavigator.viroAppProps.memories.map((memory, i) => (
             <ViroImage
               key={memory.id}
               source={{ uri: memory.image }}
               width={memory.ARsize}
               height={memory.ARsize}
-              position={memory.ARpopularity[this.props.data.currentMonth]}
+              position={
+                memory.ARpopularity[
+                  this.props.arSceneNavigator.viroAppProps.currentMonth
+                ]
+              }
               rotation={memory.ARrotation}
               // rotationPivot={[6, 6, 1]}
             />
@@ -121,8 +134,9 @@ export default class ViroImageScreen extends React.Component {
           autofocus={true}
           initialScene={{
             scene: HelloWorldSceneAR,
-            passProps: { data: this.state },
+            // passProps: { data: this.state },
           }}
+          viroAppProps={this.state}
           style={styles.f1}
           data={this.state}
         />
