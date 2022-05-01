@@ -41,6 +41,9 @@ class LandingScreen extends Component{
             cur_memories: memories
         })
         console.log(memories)
+        let fileUri = FileSystem.documentDirectory + "memories.json";
+        await FileSystem.writeAsStringAsync(fileUri, JSON.stringify(memories), { encoding: FileSystem.EncodingType.UTF8 });
+        console.log(fileUri)
         // console.log(memories)
         // fs.writeFile('../assets/data/memories".json', JSON.stringify(memories), (err) => {
         //     if (err) console.log('Error writing file:', err);
@@ -63,9 +66,12 @@ class LandingScreen extends Component{
         // });
     }
 
-    fetchData = (cur_memories) =>{
+    fetchData = async (cur_memories) =>{
+        let fileUri = FileSystem.documentDirectory + "memories.json";
+        let content = await FileSystem.readAsStringAsync(fileUri, { encoding: FileSystem.EncodingType.UTF8 });
+        // console.log(content)
         // data = data.map(d => d.image = require(d.imageUrl))
-        this.setState({memories: cur_memories});
+        this.setState({memories: JSON.parse(content)});
         // console.log(this.state.memories)
     }
 
