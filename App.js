@@ -35,7 +35,7 @@ import { CheethKeeth01252022 } from "./screens/discord_issues/CheethKeeth_012520
 // import ViroGeometry from "./screens/viro_tests/ViroGeometry";
 
 // import ViroImage from "./screens/viro_tests/ViroImage";
-import ViroImage from "./components/ViroImage";
+import ViroImage from "./components/ViroImageScreen";
 
 // import ViroLightingEnvironment from "./screens/viro_tests/ViroLightingEnvironment";
 // import ViroMaterials from "./screens/viro_tests/ViroMaterials";
