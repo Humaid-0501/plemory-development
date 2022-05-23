@@ -32,6 +32,8 @@ const CarouselCardItem = ({ item, index }, parallaxProps) => {
       <View style={CarouselStyles.container} key={index}>
         <Image source={{ uri: item.image }} style={CarouselStyles.image} />
         <Text style={CarouselStyles.header}>{item.name}</Text>
+        <Button type="warning" title="Call to Action" color="yellow"/>
+        <Button type="warning" title="Share" color="green"/>
         {/* <Text style={CarouselStyles.body}>{item.body}</Text> */}
       </View>
     </TouchableOpacity>
@@ -79,7 +81,7 @@ class RelatedMemoriesScreen extends React.Component {
           />
         </View>
 
-        <View style={{ marginTop: 30 }}>
+        <View style={{ marginTop: -20 }}>
           <Text style={{ textAlign: "center", color: "white" }}>
             Related Memories
           </Text>

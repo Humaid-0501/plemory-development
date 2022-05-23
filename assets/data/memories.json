@@ -4,7 +4,7 @@
      "image":"https://res.cloudinary.com/dljgmfj95/image/upload/v1651111532/gluldbax77aydhtv0r9n.png",
      "latitude":37.228280451984524,
      "longitude":-80.42063134434545,
-     "ARpopularity":[[1, 1, -4],[1,1.2,-2],[1,1.5,-2],[1,0.9,-2],[1,0.5,-2],[1,0.2,-2]],
+     "ARpopularity":[[1, 1, -4],[1,1.2,-4],[1,1.5,-4],[1,0.9,-4],[1,0.5,-4],[1,0.2,-4]],
      "ARsize": 0.5,
      "ARrotation":[0,-10,0],
      "name":"VT Snowball Fight",

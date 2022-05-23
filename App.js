@@ -16,6 +16,7 @@ import { CheethKeeth01252022 } from "./screens/discord_issues/CheethKeeth_012520
 
 import ImageCaptureScreen from "./components/ImageCaptureScreen";
 import CameraScreen from "./components/CameraScreen";
+import * as FileSystem from "expo-file-system";
 
 // import VV12202021 from "./screens/discord_issues/VV_12202021";
 // import Issue24 from "./screens/github_issues/Issue24";
@@ -333,6 +334,7 @@ export default class App extends React.Component {
   // };
 
   componentDidMount() {
+    console.log("Mount")
     this.createFile();
   }
 
@@ -340,9 +342,9 @@ export default class App extends React.Component {
     let fileUri = FileSystem.documentDirectory + "memories.json";
     let file = await FileSystem.getInfoAsync(fileUri);
     // if (!file.exists) {
-    await FileSystem.writeAsStringAsync(fileUri, JSON.stringify(data), {
-      encoding: FileSystem.EncodingType.UTF8,
-    });
+      await FileSystem.writeAsStringAsync(fileUri, JSON.stringify(data), {
+        encoding: FileSystem.EncodingType.UTF8,
+      });
     console.log(fileUri);
     // }
     let content = await FileSystem.readAsStringAsync(fileUri, {

@@ -45,6 +45,7 @@ class ImageCaptureScreen extends React.Component {
     let data = {
       file: base64Img,
       upload_preset: "wegfpc3e",
+      quality: "eco"
     };
     this.setState({
       isLoading: true,
@@ -148,7 +149,14 @@ class ImageCaptureScreen extends React.Component {
                 maxLength={32}
                 name="title"
               />
-              <Button name="Upload" title="Upload" onPress={this.upload} />
+              <View style={{backgroundColor: '#00aeef',
+              //   borderColor: 'red',
+                borderWidth: 2,
+                borderRadius: 20,
+                width: "50%",
+                left: "25%" }}>
+                    <Button name="Upload" title="Upload" onPress={this.upload} color="white" />
+                </View>
             </View>
           </View>
         )}
@@ -173,7 +181,7 @@ const styles = StyleSheet.create({
   },
   textStyling: {
     position: "absolute",
-    top: 0.7 * Dimensions.get("window").height,
+    top: 0.01 * Dimensions.get("window").height,
     width: "100%",
     // bottom: "50%"
   },

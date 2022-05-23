@@ -34,10 +34,11 @@ class LandingScreen extends Component {
     let memories = this.state.memories;
     for (let i = 0; i < memories.length; i++) {
       if (memories[i].id == id) {
-        if (action == "throw") {
-          memories[i].popularity += 10;
-        } else {
-          memories[i].popularity += 30;
+        if(action == "throw"){
+          memories[i].popularity[0] += Math.floor(0.3 * (100 - memories[i].popularity[0]))
+        }
+        else{
+            memories[i].popularity[0] += Math.floor(0.1 * (100 - memories[i].popularity[0]))
         }
       }
     }
@@ -112,6 +113,7 @@ class LandingScreen extends Component {
                   borderRadius: 10,
                   borderColor: "black",
                   borderWidth: 1,
+                  marginLeft: 20
                 }}
               />
               {/* <Ionicons name="md-checkmark-circle" size={32} color="green" /> */}

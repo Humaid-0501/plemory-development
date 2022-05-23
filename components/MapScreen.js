@@ -68,7 +68,7 @@ class MapScreen extends React.Component {
             this.state.memories &&
             this.state.memories.map((memory, i) => (
               <View
-                key={this.state.memories.id}
+                key={memory.id}
                 onPress={() =>
                   this.props.navigation.navigate("Related Memories", {
                     memories: this.state.memories,
@@ -82,7 +82,7 @@ class MapScreen extends React.Component {
                     width: memory.popularity[this.state.currentMonth],
                     height: memory.popularity[this.state.currentMonth],
                   }}
-                  key={this.state.memories.id}
+                  key={memory.id}
                   title={memory.name}
                   description={memory.location}
                   coordinate={{
@@ -92,13 +92,13 @@ class MapScreen extends React.Component {
                 >
                   {/* <TouchableOpacity onPress={() => this.props.navigation.navigate("Related Memories", {memory: memory})}> */}
                   <Image
-                    key={this.state.memories.id}
+                    key={memory.id}
                     source={{ uri: memory.image }}
                     style={{
                       width: memory.popularity[this.state.currentMonth],
                       height: memory.popularity[this.state.currentMonth],
-                      resizeMode: "contain",
-                      borderRadius: 20,
+                      resizeMode: "stretch",
+                      borderRadius: 100,
                     }}
                   />
                   {/* </TouchableOpacity> */}
@@ -117,6 +117,7 @@ class MapScreen extends React.Component {
             minimumValue={0}
             maximumValue={5}
             onSlidingComplete={this.sliderChanged}
+            value={this.state.currentMonth}
             // vertical
             // minimumTrackTintColor="bl"
             // maximumTrackTintColor="#000000"
@@ -174,7 +175,7 @@ const styles = StyleSheet.create({
   },
   cameraButtonStyling: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "white",
+    backgroundColor: "red",
     width: 100,
     height: 100,
     borderRadius: 100,

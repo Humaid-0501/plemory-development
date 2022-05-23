@@ -161,9 +161,10 @@ var styles = StyleSheet.create({
   sliderContainer: {
     position: "absolute",
     top: "50%",
+    left: "60%",
     width: 200,
     height: 40,
-    right: 5,
+    right: 0,
     transform: [{ rotate: "270deg" }],
     zIndex: 100,
     // display: "none",
